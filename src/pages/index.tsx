@@ -167,9 +167,12 @@ interface Props {
   price: Prices;
   liqid: Token[];
   hTvl: hTvl;
+  holdCount:holdCount;
+  topTenHolder:topTenHolder;
+  topFiveHolder:topFiveHolders;
   
 }
-const Home = ({ price, pools, liqid, hTvl}: Props) => {
+const Home = ({ price, pools, liqid, hTvl,holdCount,topTenHolder,topFiveHolder }: Props) => {
   return (
     <>
       <Head>
@@ -190,7 +193,7 @@ const Home = ({ price, pools, liqid, hTvl}: Props) => {
           <tbody>
             <Asset coins={price.coins} />
             <Daily />
-            <LiqRate coins={price.coins} liqid={liqid}/>
+            <LiqRate holders={topTenHolder.holders} topFiveHolder={topFiveHolder}  holdersCount={holdCount.holdersCount} coins={price.coins} liqid={liqid}/>
             <ApyApr data={pools.data}/>
           </tbody>
         </Table>
@@ -201,7 +204,7 @@ const Home = ({ price, pools, liqid, hTvl}: Props) => {
   );
 };
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const [poolRes, priceRes, liqidRes, hTvlRes] = await Promise.all([
+  const [poolRes, priceRes, liqidRes, hTvlRes,holdCountRes,topTenHolderRes,topFiveHolderRes] = await Promise.all([
     fetch("https://yields.llama.fi/pools"),
     fetch(
       "https://coins.llama.fi/prices/current/ethereum:0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2?searchWidth=4h"
@@ -210,17 +213,20 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       "https://aave-api-v2.aave.com/data/liquidity/v2?poolId=0xb53c1a33016b2dc2ff3653530bff1848a515c8c5"
     ),
     fetch("https://yields.llama.fi/chart/f2726d05-1f8d-4b9c-80e3-43d03d85d117"),
-    // fetch("https://api.ethplorer.io/getTokenInfo/0x030bA81f1c18d280636F32af80b9AAd02Cf0854e?apiKey=freekey"),
-    // fetch("https://api.ethplorer.io/getTopTokenHolders/0x030bA81f1c18d280636F32af80b9AAd02Cf0854e?apiKey=freekey"),
-    // fetch("https://api.ethplorer.io/getTopTokenHolders/0x030bA81f1c18d280636F32af80b9AAd02Cf0854e?apiKey=freekey&limit=30")
+    fetch("https://api.ethplorer.io/getTokenInfo/0x030bA81f1c18d280636F32af80b9AAd02Cf0854e?apiKey=freekey"),
+    fetch("https://api.ethplorer.io/getTopTokenHolders/0x030bA81f1c18d280636F32af80b9AAd02Cf0854e?apiKey=freekey"),
+    fetch("https://api.ethplorer.io/getTopTokenHolders/0x030bA81f1c18d280636F32af80b9AAd02Cf0854e?apiKey=freekey&limit=30")
   ]);
-  const [pools, price, liqid, hTvl] = await Promise.all([
+  const [pools, price, liqid, hTvl,holdCount,topTenHolder,topFiveHolder] = await Promise.all([
     poolRes.json(),
     priceRes.json(),
     liqidRes.json(),
     hTvlRes.json(),
+    holdCountRes.json(),
+    topTenHolderRes.json(),
+    topFiveHolderRes.json()
   ]);
 
-  return { props: { pools, price, liqid, hTvl } };
+  return { props: { pools, price, liqid, hTvl, holdCount,topTenHolder,topFiveHolder } };
 };
 export default Home;
