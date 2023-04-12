@@ -1,6 +1,17 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import { MantineProvider } from "@mantine/core";
+import type { AppProps } from "next/app";
+import { Inter } from "next/font/google";
 
+const inter = Inter({ subsets: ["latin"] });
 export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+	return (
+		<MantineProvider
+    withGlobalStyles
+    withNormalizeCSS
+    theme={{ 
+      fontFamily:inter.style.fontFamily
+     }}>
+			<Component {...pageProps} />
+		</MantineProvider>
+	);
 }
