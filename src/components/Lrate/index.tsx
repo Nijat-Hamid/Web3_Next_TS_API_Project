@@ -3,19 +3,6 @@ import { NextPage } from "next";
 
 interface Props{
   liqid: Token[];
-  holdersCount:number;
-    holders:[{
-      adress:string
-      share:number
-      balance:number
-    }]
-    topFiveHolder:{
-      holders:[{
-        adress:string
-        share:number
-        balance:number
-      }]
-    }
   coins: {
     [key: string]: {
       decimals: number;
@@ -27,15 +14,13 @@ interface Props{
   };
 }
 
-const LiqRate: NextPage<Props> = ({ liqid,coins,holdersCount, holders, topFiveHolder }) =>  {
+const LiqRate: NextPage<Props> = ({ liqid,coins }) =>  {
   const data= liqid.filter((filter:Token)=> filter.symbol ==="WETH")
   const price = coins["ethereum:0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"].price
   const startDate = new Date("2017-12-12")
   const today = new Date();
   const diffInTime = today.getTime() - startDate.getTime();
   const diffInDays = Math.floor(diffInTime / (1000 * 3600 * 24));
-  // const totalShare=holders?.map((holder) => holder.share).reduce((acc,amount)=> acc+amount);
-  // const totalFiveShare=topFiveHolder?.holders.map((holder)=> holder.share).reduce((acc,amount)=>acc+amount);
   return (
     <>
       <tr>
