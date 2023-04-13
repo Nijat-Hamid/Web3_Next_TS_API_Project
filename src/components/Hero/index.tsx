@@ -63,7 +63,16 @@ export function HeroText() {
 
         <Container p={0} >
           <Text size="lg" color="dimmed" className={classes.description}>
-            Pool Contract: 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
+            Weth Contract: 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
+          </Text>
+          <Text size="lg" color="dimmed" className={classes.description}>
+            aWeth Contract: 0x030bA81f1c18d280636F32af80b9AAd02Cf0854e
+          </Text>
+          <Text size="lg" color="dimmed" className={classes.description}>
+            aWeth(Variable Borrow) Contract: 0x030bA81f1c18d280636F32af80b9AAd02Cf0854e
+          </Text>
+          <Text size="lg" color="dimmed" className={classes.description}>
+            aWeth(Stable Borrow) Contract: 0x4e977830ba4bd783C0BB7F15d3e243f73FF57121
           </Text>
         </Container>
       </div>

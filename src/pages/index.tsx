@@ -88,7 +88,7 @@ export interface Token {
   variableRateSlope1: string;
   variableRateSlope2: string;
   isFrozen: boolean;
-  reserveFactor: string;
+  reserveFactor: number;
   stableDebtLastUpdateTimestamp: number;
   averageStableRate: string;
   totalPrincipalStableDebt: string;
@@ -194,7 +194,7 @@ const Home = ({ price, pools, liqid, hTvl,holdCount,topTenHolder,topFiveHolder }
             <Asset coins={price.coins} />
             <Daily />
             <LiqRate holders={topTenHolder.holders} topFiveHolder={topFiveHolder}  holdersCount={holdCount.holdersCount} coins={price.coins} liqid={liqid}/>
-            <ApyApr data={pools.data}/>
+            <ApyApr dataO={hTvl} data={pools.data}/>
           </tbody>
         </Table>
         <Htvl data={hTvl.data}/>

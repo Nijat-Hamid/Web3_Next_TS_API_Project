@@ -40,7 +40,7 @@ const LiqRate: NextPage<Props> = ({ liqid,coins,holdersCount, holders, topFiveHo
     <>
       <tr>
         <td>Deposited Amount(Token):</td>
-        <td style={{ textAlign: "right" }}>{Intl.NumberFormat('en',{notation:"compact",currency:"USD",style:"currency",maximumFractionDigits:3}).format(data?.[0].totalLiquidity) }</td>
+        <td style={{ textAlign: "right" }}>{Intl.NumberFormat('en',{notation:"compact",maximumFractionDigits:3}).format(data?.[0].totalLiquidity) }</td>
       </tr>
       <tr>
         <td>Deposited Amount(USD):</td>
@@ -48,7 +48,7 @@ const LiqRate: NextPage<Props> = ({ liqid,coins,holdersCount, holders, topFiveHo
       </tr>
       <tr>
         <td>Borrowed Amount:</td>
-        <td style={{ textAlign: "right" }}>{Intl.NumberFormat('en',{notation:"compact",currency:"USD",style:"currency",maximumFractionDigits:2}).format(data?.[0].totalDebt) }</td>
+        <td style={{ textAlign: "right" }}>{Intl.NumberFormat('en',{notation:"compact",maximumFractionDigits:2}).format(data?.[0].totalDebt) }</td>
       </tr>
       <tr>
         <td>Borrowed Amount(USD):</td>
@@ -57,7 +57,7 @@ const LiqRate: NextPage<Props> = ({ liqid,coins,holdersCount, holders, topFiveHo
       <tr>
         <td>Liqudity:</td>
         <td style={{ textAlign: "right" }}>
-          {Intl.NumberFormat('en',{notation:"compact",currency:"USD",style:"currency",maximumFractionDigits:2}).format(data?.[0].availableLiquidity) }
+          {Intl.NumberFormat('en',{notation:"compact",maximumFractionDigits:2}).format(data?.[0].availableLiquidity) }
         </td>
       </tr>
       <tr>
@@ -98,12 +98,12 @@ const LiqRate: NextPage<Props> = ({ liqid,coins,holdersCount, holders, topFiveHo
       </tr>
       <tr>
         <td>Reserve Factor:</td>
-        <td style={{ textAlign: "right" }}>{data?.[0].reserveFactor}</td>
+        <td style={{ textAlign: "right" }}>{(data?.[0].reserveFactor * 100).toFixed(2) + "%"}</td>
       </tr>
       <tr>
         <td>Collateral asset:</td>
         <td style={{ textAlign: "right" }}>
-          {(data?.[0].usageAsCollateralEnabled).toString()}
+          {data?.[0].usageAsCollateralEnabled===true? "Yes":"No"}
         </td>
       </tr>
       <tr>
@@ -113,9 +113,15 @@ const LiqRate: NextPage<Props> = ({ liqid,coins,holdersCount, holders, topFiveHo
         </td>
       </tr>
       <tr>
-        <td>Holders Count:</td>
+        <td>Depositors Count:</td>
         <td style={{ textAlign: "right" }}>
-          Api limitation
+        18,040(static)
+        </td>
+      </tr>
+      <tr>
+        <td>Borrowers (Variable + Stable) Count:</td>
+        <td style={{ textAlign: "right" }}>
+         1611 (Static)
         </td>
       </tr>
       <tr>
@@ -133,13 +139,13 @@ const LiqRate: NextPage<Props> = ({ liqid,coins,holdersCount, holders, topFiveHo
       <tr>
         <td>Top 10 largest depositors share:</td>
         <td style={{ textAlign: "right" }}>
-          Api limitation
+          34.27% (Static)
         </td>
       </tr>
       <tr>
         <td>Top 0.5% of Total depositors share:</td>
         <td style={{ textAlign: "right" }}>
-          Api Limiation
+          54.1% (Static)
         </td>
       </tr>
     </>

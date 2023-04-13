@@ -34,7 +34,7 @@ const Daily = () => {
     <tr>
       <td>Daily Perchantage:</td>
       <td style={{ textAlign: "right" }}>
-        {data?.coins["ethereum:0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"].toFixed(4)}%
+        {data?.coins["ethereum:0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"].toFixed(2)}%
       </td>
     </tr>
   );

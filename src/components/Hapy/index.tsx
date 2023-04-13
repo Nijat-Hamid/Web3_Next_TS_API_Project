@@ -8,18 +8,33 @@ const Hapy: NextPage<hTvl> = ({ data }) => {
   const [value, setValue] = useState("365");
   const series = [
     {
-      name: "APY",
+      name: "APY Base",
       data:
         value === "365"
-          ? data.map((tvl) => tvl.apy)
+          ? data.map((tvl) => tvl.apyBase)
           : value === "180"
-          ? data.slice(data.length - 180, data.length).map((tvl) => tvl.apy)
+          ? data.slice(data.length - 180, data.length).map((tvl) => tvl.apyBase)
           : value === "90"
-          ? data.slice(data.length - 90, data.length).map((tvl) => tvl.apy)
+          ? data.slice(data.length - 90, data.length).map((tvl) => tvl.apyBase)
           : value === "30"
-          ? data.slice(data.length - 30, data.length).map((tvl) => tvl.apy)
+          ? data.slice(data.length - 30, data.length).map((tvl) => tvl.apyBase)
           : value === "7"
-          ? data.slice(data.length - 7, data.length).map((tvl) => tvl.apy)
+          ? data.slice(data.length - 7, data.length).map((tvl) => tvl.apyBase)
+          : [],
+    },
+    {
+      name: "APY Reward",
+      data:
+        value === "365"
+          ? data.map((tvl) => tvl.apyReward)
+          : value === "180"
+          ? data.slice(data.length - 180, data.length).map((tvl) => tvl.apyReward)
+          : value === "90"
+          ? data.slice(data.length - 90, data.length).map((tvl) => tvl.apyReward)
+          : value === "30"
+          ? data.slice(data.length - 30, data.length).map((tvl) => tvl.apyReward)
+          : value === "7"
+          ? data.slice(data.length - 7, data.length).map((tvl) => tvl.apyReward)
           : [],
     },
   ];
@@ -60,8 +75,12 @@ const Hapy: NextPage<hTvl> = ({ data }) => {
       background: "#343E59",
       foreColor: "#fff",
       fontFamily: "Roboto",
+      stacked: true,
       toolbar: {
         show: true,
+      },
+      zoom: {
+        enabled: true
       },
       theme: {
         mode: "dark",
@@ -105,7 +124,7 @@ const Hapy: NextPage<hTvl> = ({ data }) => {
           label="7 days"
         />
       </Radio.Group>
-      <Chart options={options} series={series} type="area" width="100%" />
+      <Chart options={options} series={series} type="bar" width="100%" />
     </div>
   );
 };
